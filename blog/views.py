@@ -1,18 +1,25 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 from django.views.generic import ListView
-from .models import Post
+from .models import Post, Comment
+from .forms import EmailPostForm, CommentForm
+from taggit.models import Tag
 
 
-class PostListView(ListView):
-    queryset = Post.published.all()
-    context_object_name = 'posts'
-    paginate_by = 3
-    template_name = 'blog/post/list.html'
+#class PostListView(ListView):
+#    queryset = Post.published.all()
+#    context_object_name = 'posts'
+#    paginate_by = 3
+#    template_name = 'blog/post/list.html'
 
     
-'''def post_list(request):
+def post_list(request, tag_slug=None):
     object_list = Post.published.all()
+    tag = 0
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
     paginator = Paginator(object_list, 3)
     page = request.GET.get('page')
     try:
@@ -21,12 +28,50 @@ class PostListView(ListView):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_page)        
-    return render(request, 'blog/post/list.html', {'page': page, 'posts': posts})'''
+    return render(request, 'blog/post/list.html', {'page': page, 'posts': posts, 'tag': tag})
 
 def post_detail(request, year, month, day, slug_post):
     post = get_object_or_404(Post, slug=slug_post, status='published', publish__year=year,
                              publish__month=month, publish__day=day)
+    
+    # Список активных комментариев для этой статьи.
+    comments = post.comments.filter(active=True)
+    new_comment = None
+    if request.method == 'POST':
+    # Пользователь отправил комментарий.
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+        # Создаем комментарий, но пока не сохраняем в базе данных.
+            new_comment = comment_form.save(commit=False)
+            # Привязываем комментарий к текущей статье.
+            new_comment.post = post
+            # Сохраняем комментарий в базе данных.
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request,'blog/post/detail.html',{'post': post,
+                                                    'comments': comments,
+                                                    'new_comment': new_comment,
+                                                    'comment_form': comment_form})                         
                              
-    return render(request, 'blog/post/detail.html', { 'post': post })    
+        
 
-# Create your views here.
+def post_share(request, post_id):
+    # Получение статьи по идентификатору.
+    post = get_object_or_404(Post, id=post_id, status='published')
+    sent = False
+    if request.method == 'POST':
+        # Форма была отправлена на сохранение.
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # Все поля формы прошли валидацию.
+            cleared_input_data = form.cleaned_data
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            subject = f"{cleared_input_data['name']} ({cleared_input_data['email']}) recommends you reading \"{post.title}\""
+            message = f"Read \"{post.title}\" at {post_url}\n\n{cleared_input_data['name']}\'s comments: {cleared_input_data['comments']}"
+            send_mail(subject, message, 'saper663emailbot@gmail.com', [cleared_input_data['to']])
+            sent = True
+            # ... Отправка электронной почты.
+    else:
+        form = EmailPostForm()
+    return render(request, 'blog/post/share.html', {'form': form, 'post': post, 'sent': sent})    
