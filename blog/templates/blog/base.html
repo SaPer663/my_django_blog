@@ -1,4 +1,5 @@
 {% load blog_tags %}
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -11,11 +12,11 @@
             {% block content %}{% endblock %}
         </div>
         <div id="sidebar">
-            <h2>My blog</h2>
-            <p>This is my blog. I've written {% total_posts %} posts so far.</p>
-            <h3>Latest posts</h3>
+            <h2>{% trans 'My blog' %}</h2>
+            <p>{% trans "This is my blog. I've written" %} {% total_posts %} {% trans 'posts so far.' %}</p>
+            <h3>{% trans 'Latest posts' %}</h3>
             {% show_latest_posts 3 %}
-            <h3>Most commented posts</h3>
+            <h3>{% trans 'Most commented posts' %}</h3>
             {% get_most_commented_posts as most_commented_posts %}
             <ul>
                 {% for post in most_commented_posts %}
