@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-25 17:02+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: blog/apps.py:7
+msgid "Blog"
+msgstr "Блог"
+
+#: blog/models.py:15
+msgid "Draft"
+msgstr "Черновик"
+
+#: blog/models.py:15 blog/templates/blog/post/detail.html:11
+#: blog/templates/blog/post/list.html:24
+msgid "Published"
+msgstr "Опубликованно"
+
+#: blog/models.py:16
+msgid "Title"
+msgstr "Заголовок"
+
+#: blog/models.py:19
+msgid "Author"
+msgstr "Автор"
+
+#: blog/models.py:20 blog/models.py:45
+msgid "body"
+msgstr "текст"
+
+#: blog/models.py:21
+msgid "publish"
+msgstr "Опубликовать"
+
+#: blog/models.py:22 blog/models.py:46
+msgid "created"
+msgstr "созданно"
+
+#: blog/models.py:24
+msgid "status"
+msgstr "статус"
+
+#: blog/models.py:32
+msgid "Posts"
+msgstr "Посты"
+
+#: blog/models.py:42
+msgid "post"
+msgstr "пост"
+
+#: blog/models.py:43
+msgid "name"
+msgstr "имя"
+
+#: blog/models.py:44
+msgid "email"
+msgstr "почта"
+
+#: blog/models.py:47
+msgid "updated"
+msgstr "обнавленно"
+
+#: blog/models.py:48
+msgid "active"
+msgstr "активно"
+
+#: blog/models.py:53 blog/templates/blog/post/detail.html:27
+msgid "Comments"
+msgstr "Комментарии"
+
+#: blog/templates/blog/base.html:15 blog/templates/blog/post/list.html:3
+#: blog/templates/blog/post/list.html:5
+msgid "My blog"
+msgstr "Мой блог"
+
+#: blog/templates/blog/base.html:16
+msgid "This is my blog. I've written"
+msgstr "Это мой блог. Я написал"
+
+#: blog/templates/blog/base.html:16
+msgid "posts so far."
+msgstr "постов"
+
+#: blog/templates/blog/base.html:17
+msgid "Latest posts"
+msgstr "Последниe посты"
+
+#: blog/templates/blog/base.html:19
+msgid "Most commented posts"
+msgstr "Самые обсуждаемые посты"
+
+#: blog/templates/blog/post/detail.html:11
+#: blog/templates/blog/post/detail.html:33
+#: blog/templates/blog/post/list.html:24
+msgid "by"
+msgstr " "
+
+#: blog/templates/blog/post/detail.html:18
+msgid "Similar posts"
+msgstr "Похожие посты"
+
+#: blog/templates/blog/post/detail.html:24
+msgid "There are no similar posts yet."
+msgstr "Здесь ещё нет похожих постов"
+
+#: blog/templates/blog/post/detail.html:33
+msgid "Comment"
+msgstr "Комментарий"
+
+#: blog/templates/blog/post/detail.html:39
+msgid "There are no comments yet."
+msgstr "Здесь ещё нет комментариев"
+
+#: blog/templates/blog/post/detail.html:42
+msgid "Your comment has been added."
+msgstr "Ваш комментарий добавлен"
+
+#: blog/templates/blog/post/detail.html:44
+msgid "Add a new comment"
+msgstr "Добавить новый комментарий"
+
+#: blog/templates/blog/post/detail.html:45
+msgid "Add comment"
+msgstr "Добавить комментарий"
+
+#: blog/templates/blog/post/list.html:8
+msgid "Posts tagged with"
+msgstr "Сообщения с тэгами"
+
+#: blog/templates/blog/post/list.html:16
+msgid "Tags:"
+msgstr "Тэги:"
+
+#: blog/templates/blog/post/share.html:6
+msgid "E-mail successfully sent"
+msgstr "Письмо отправленно"
+
+#: blog/templates/blog/post/share.html:8
+#, fuzzy
+#| msgid "E-mail successfully sent"
+msgid "was successfully sent to"
+msgstr "Письмо отправленно"
+
+#: blog/templates/blog/post/share.html:12
+msgid "Share"
+msgstr "Поделиться"
+
+#: blog/templates/blog/post/share.html:12
+#, fuzzy
+#| msgid "email"
+msgid "by e-mail"
+msgstr "через почту"
+
+#: blog/templates/pagination.html:5
+msgid "Previous"
+msgstr "Предыдущая"
+
+#: blog/templates/pagination.html:8
+msgid "Page"
+msgstr "Страница"
+
+#: blog/templates/pagination.html:8
+msgid "of"
+msgstr "из"
+
+#: blog/templates/pagination.html:11
+msgid "Next"
+msgstr "Следующая"
+
+#~ msgid "%(total_comments)s  comment %(total_comments|pluralize)s"
+#~ msgstr "%(total_comments)s  коммент %(total_comments|pluralize)s"
+
+#, fuzzy
+#~| msgid "Comments"
+#~ msgid "comment"
+#~ msgstr "комментарий"
