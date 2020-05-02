@@ -1,3 +1,4 @@
+import math
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
@@ -15,21 +16,26 @@ from taggit.models import Tag
 #    paginate_by = 3
 #    template_name = 'blog/post/list.html'
 
-    
+def get_two_parts_of_posts_list(posts_list):
+    posts_part = math.ceil(len(posts_list) / 2)
+    return (posts_list[:posts_part], posts_list[posts_part:])
+
+
 def post_list(request, tag_slug=None):
     object_list = Post.published.all()
     tag = 0
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
-    paginator = Paginator(object_list, 3)
+    paginator = Paginator(object_list, 8)
     page = request.GET.get('page')
     try:
-        posts = paginator.page(page)
+        posts = get_two_parts_of_posts_list(paginator.page(page))
     except PageNotAnInteger:
-        posts = paginator.page(1)
+        posts = get_two_parts_of_posts_list(paginator.page(1))
+        #posts = paginator.page(1)
     except EmptyPage:
-        posts = paginator.page(paginator.num_page)        
+        posts = get_two_parts_of_posts_list(paginator.page(paginator.num_page))        
     return render(request, 'blog/post/list.html', {'page': page, 'posts': posts, 'tag': tag})
 
 def post_detail(request, year, month, day, slug_post):

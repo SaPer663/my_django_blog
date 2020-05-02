@@ -18,3 +18,12 @@ def show_latest_posts(count=5):
 def get_most_commented_posts(count=5):
     return Post.published.annotate(total_comments=Count('comments'))\
                                   .order_by('-total_comments')[:count]
+
+
+@register.simple_tag
+def get_the_number_of_comments_per_post(post):
+    return post.comments.count()
+
+@register.simple_tag
+def get_day_and_month_of_post_publication(post):
+    return post.publish.strftime("%d %B ")
