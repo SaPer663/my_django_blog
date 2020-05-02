@@ -8,7 +8,20 @@ from taggit.managers import TaggableManager
 
 class PublishedManager(models.Manager): 
     def get_queryset(self): 
-        return super(PublishedManager, self).get_queryset().filter(status='published')        
+        return super(PublishedManager, self).get_queryset().filter(status='published')
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    
+    class Meta:
+        ordering = ('name',)
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
+    
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -22,6 +35,10 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft',
                               verbose_name=_('status'))
+    category = models.ForeignKey(Category,related_name='category',
+                                 verbose_name=_('category'),
+                                 on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, verbose_name=_('image'))
     objects = models.Manager()
     published = PublishedManager()
     tags = TaggableManager()
