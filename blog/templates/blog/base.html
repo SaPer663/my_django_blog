@@ -48,15 +48,15 @@
           <div
             class="header-top d-flex justify-content-between align-items-lg-center navbar-expand-lg">
             <div class="col menu-left">
-              <a class="active" href="{% static 'index.html' %}">Home</a>
-              <a href="{% static 'category.html' %}">Category</a>
-              <a href="{% static 'archive.html' %}">Archive</a>
+              <a class="active" href="">Home</a>
+              <a href="{% static 'category.html' %}"></a>
+              <a href="{% static 'archive.html' %}"></a>
             </div>
             <div class="col-5 text-lg-center mt-2 mt-lg-0">
               <span class="logo-outer">
                 <span class="logo-inner">
                   <a href="{% static 'index.html' %}"
-                    ><img class="mx-auto" src="{% static 'blog/img/logo.png' %}" alt=""
+                    ><img class="mx-auto" src="{% static 'blog/img/logo_saper663.png' %}" alt=""
                   /></a>
                 </span>
               </span>
@@ -79,7 +79,7 @@
               >
                 <ul class="navbar-nav justify-content-center w-100">
                   <li class="nav-item hide-lg">
-                    <a class="nav-link" href="{% static 'index.html' %}">Home</a>
+                    <a class="nav-link" href="">Home</a>
                   </li>
                   <li class="nav-item hide-lg">
                     <a class="nav-link" href="{% static 'category.html' %}">Category</a>
@@ -99,13 +99,13 @@
                     </div>
                   </li> -->
                   <li class="nav-item">
-                    <a class="nav-link" href="{% static 'elements.html' %}">Elements</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link" href="{% static 'blog-single.html' %}">Blog Detail</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% static 'contact.html' %}">Contact</a>
+                    <a class="nav-link" href="{% static 'contact.html' %}"></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% static 'elements.html' %}"></a>
                   </li>
                 </ul>
               </div>
@@ -186,10 +186,11 @@
     <!--================ End banner Area =================-->
 
     <!--================ Start Blog Post Area =================-->
+    {% block content%}
     <section class="blog-post-area section-gap relative">
       <div class="container">
         <div class="row">
-          {% block content%}{% endblock%}
+    {% endblock%}
 
           <!-- Start Blog Post Siddebar -->
           <div class="col-lg-4 sidebar-widgets">
