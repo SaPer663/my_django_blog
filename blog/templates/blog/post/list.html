@@ -31,7 +31,7 @@
                     <a href="#" class=""
                       ><span class="ti-calendar"></span>{{ post.publish }}</a
                     >
-                    <a href="#" class="ml-20"
+                    <a href="{{ post.get_absolute_url  }}#comments" class="ml-20"
                       ><span class="ti-comment"></span>{% get_the_number_of_comments_per_post post  %}</a
                     >
                   </div>

@@ -11,8 +11,10 @@
 <section class="banner-area relative">
     <div class="overlay overlay-bg"></div>
   <div class="banner-content text-center">
-    <h1>Blog Details</h1>
+    <h1>{% trans 'More details' %}</h1>
+    <!--
     <p>Elementum libero hac leo integer. Risus hac parturient feugiat litora <br /> cursus hendrerit bibendum per </p>
+    -->
   </div>
 </section>
 {% endblock banner %}
@@ -49,16 +51,19 @@
                           <div class="news_d_footer flex-column flex-sm-row">
                               <a href="#"><i class="lnr lnr lnr-heart"></i>Lily and 4 people like this</a>
                               <a class="justify-content-sm-center ml-sm-auto mt-sm-0 mt-2" href="#"><i class="lnr lnr lnr-bubble"></i>{% get_the_number_of_comments_per_post post %} Comments</a>
+                              <!--
                               <div class="news_socail ml-sm-auto mt-sm-0 mt-2">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-youtube-play"></i></a>
                                 <a href="#"><i class="fa fa-pinterest"></i></a>
                                 <a href="#"><i class="fa fa-rss"></i></a>
-                            </div>
-                          </div>
+                              </div>
+                            -->
+                           </div>
                        </div>
                        <div class="navigation-area">
+                        <a name="comments"></a>
                         <div class="row">
                             <!--
                             <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
@@ -88,7 +93,7 @@
                         -->									
                         </div>
                     </div>
-                    <div class="comments-area">
+                    <div class="comments-area" >
                         <h4>{% get_the_number_of_comments_per_post post %} Comments</h4>
                     {% for comment in comments %}
                         <div class="comment-list">
@@ -118,22 +123,36 @@
                     </div>
                     <div class="comment-form">
                         <h4>Leave a Reply</h4>
-                        <form>
+                        <form form action="." method="post">
+                            {{ comment_form.non_field_errors }}
                             <div class="form-group form-inline">
                               <div class="form-group col-lg-6 col-md-6 name">
-                                <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                                {{ comment_form.name.errors }}
+                                {{ comment_form.name }}
+                                <!--<input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">-->
                               </div>
                               <div class="form-group col-lg-6 col-md-6 email">
+                                {{ comment_form.email.errors }}
+                                {{ comment_form.email }}
+                                <!--
                                 <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                -->
                               </div>										
                             </div>
+                            <!--
                             <div class="form-group">
                                 <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
                             </div>
+                            -->
                             <div class="form-group">
+                                {{ comment_form.body.errors }}
+                                {{ comment_form.body }}
+                                <!--
                                 <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                                -->
                             </div>
-                            <a href="#" class="primary-btn submit_btn">Post Comment</a>	
+                            {% csrf_token %}
+                            <div><input type="submit" class="primary-btn submit_btn" value="Post Comment"></div>	
                         </form>
                     </div>
                 </div>
