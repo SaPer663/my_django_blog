@@ -1,6 +1,6 @@
 from django import template
 from django.db.models import Count
-from ..models import Post
+from ..models import Post, Comment
 
 
 register = template.Library()
@@ -22,7 +22,12 @@ def get_most_commented_posts(count=5):
 
 @register.simple_tag
 def get_the_number_of_comments_per_post(post):
-    return post.comments.count()
+    '''argument post is a post from a list of posts
+       the function returns the number of comments on a specific post
+    '''
+    return Comment.objects.filter(post__title=post, active=True).count()
+    #post.comments.count() 
+
 
 @register.simple_tag
 def get_day_and_month_of_post_publication(post):
